@@ -382,48 +382,6 @@ a:hover {
     color: var(--primary-hover);
 }
 
-/* Stats Section */
-.stats-section {
-    background: var(--bg-secondary);
-    padding: 60px 0;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.stat-card {
-    background: var(--bg-card);
-    padding: 30px;
-    border-radius: var(--radius);
-    text-align: center;
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-}
-
-.stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 8px;
-}
-
-.stat-label {
-    color: var(--text-light);
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-
 /* Footer */
 .footer {
     background: transparent;
@@ -692,10 +650,6 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -730,10 +684,6 @@ a:hover {
 }
 
 @media (max-width: 480px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
     .hero-tags {
         flex-direction: column;
         align-items: center;

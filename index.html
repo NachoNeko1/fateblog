@@ -58,30 +58,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number" data-count="10">0</div>
-                        <div class="stat-label">文章总数</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-count="15000">0</div>
-                        <div class="stat-label">阅读量</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-count="5">0</div>
-                        <div class="stat-label">专栏分类</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-count="100">0</div>
-                        <div class="stat-label">订阅者</div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="footer">
@@ -198,44 +174,10 @@
             });
         }
 
-        // Animate stats
-        function animateStats() {
-            const stats = document.querySelectorAll('.stat-number');
-            const observerOptions = {
-                threshold: 0.5
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const target = parseInt(el.getAttribute('data-count'));
-                        let current = 0;
-                        const increment = target / 50;
-                        
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current >= target) {
-                                el.textContent = target.toLocaleString();
-                                clearInterval(timer);
-                            } else {
-                                el.textContent = Math.floor(current).toLocaleString();
-                            }
-                        }, 30);
-                        
-                        observer.unobserve(el);
-                    }
-                });
-            }, observerOptions);
-
-            stats.forEach(stat => observer.observe(stat));
-        }
-
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             renderPosts();
             initThemeToggle();
-            animateStats();
             initDynamicBackground();
         });
 
