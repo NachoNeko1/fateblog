@@ -2,8 +2,7 @@
 
 /**
  * Fatetech命运科技 Markdown 构建脚本
- * 将 posts 目录下的 index.md 文件转换为 HTML 页面
- * 动态生成首页（含搜索功能、按时间排序）
+ * 将 posts/ 目录下的 .md 文件转换为 HTML 页面
  */
 
 const fs = require('fs');
@@ -21,9 +20,67 @@ const BLOG_CONFIG = {
   title: 'Fatetech命运科技',
   baseUrl: '/',
   postsDir: path.join(__dirname, 'posts'),
-  randomImagePc: 'https://pic.rkn.cc.cd/',
-  randomImageMobile: 'https://pic2.rkn.cc.cd/',
+  outputDir: path.join(__dirname, 'posts'),
+  templateFile: path.join(__dirname, 'templates', 'post-template.html'),
 };
+
+// 文章数据（用于首页）
+const BLOG_POSTS_DATA = [
+  {
+    id: 1,
+    title: 'Hello World - 我的第一篇博客',
+    description: '开始记录我的博客之旅，分享我的想法和技术笔记。',
+    date: '2024-01-15',
+    tags: ['简介', 'Hello World'],
+    image: 'https://picsum.photos/seed/blog1/400/200',
+    readTime: '3 分钟',
+  },
+  {
+    id: 2,
+    title: 'GitHub Actions 自动化部署指南',
+    description: '如何使用 GitHub Actions 实现博客的自动部署和持续集成。',
+    date: '2024-01-20',
+    tags: ['GitHub', 'DevOps', 'CI/CD'],
+    image: 'https://picsum.photos/seed/blog2/400/200',
+    readTime: '8 分钟',
+  },
+  {
+    id: 3,
+    title: '现代 CSS 布局技巧',
+    description: '深入探讨 Flexbox 和 Grid 在现代网页设计中的应用。',
+    date: '2024-01-25',
+    tags: ['CSS', '前端', '布局'],
+    image: 'https://picsum.photos/seed/blog3/400/200',
+    readTime: '10 分钟',
+  },
+  {
+    id: 4,
+    title: 'JavaScript 异步编程完全指南',
+    description: '从回调函数到 async/await，全面理解 JavaScript 异步编程。',
+    date: '2024-02-01',
+    tags: ['JavaScript', '异步', '编程'],
+    image: 'https://picsum.photos/seed/blog4/400/200',
+    readTime: '15 分钟',
+  },
+  {
+    id: 5,
+    title: '响应式设计最佳实践',
+    description: '打造在不同设备上都有优秀体验的网页设计。',
+    date: '2024-02-10',
+    tags: ['响应式', '设计', '移动端'],
+    image: 'https://picsum.photos/seed/blog5/400/200',
+    readTime: '7 分钟',
+  },
+  {
+    id: 6,
+    title: 'TypeScript 入门与实践',
+    description: '从零开始学习 TypeScript，提升代码质量和开发效率。',
+    date: '2024-02-15',
+    tags: ['TypeScript', '类型系统', '前端'],
+    image: 'https://picsum.photos/seed/blog6/400/200',
+    readTime: '12 分钟',
+  },
+];
 
 // 从 Markdown frontmatter 提取元数据
 function parseFrontmatter(content) {
@@ -73,8 +130,8 @@ function parseFrontmatter(content) {
   };
 }
 
-// 生成文章页面
-function generatePostTemplate(postMetadata, htmlContent, postPath) {
+// 生成文章模板
+function generatePostTemplate(postMetadata, htmlContent) {
   const { title, description, date, tags = [] } = postMetadata;
 
   const tagsHtml = tags
@@ -99,7 +156,7 @@ function generatePostTemplate(postMetadata, htmlContent, postPath) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans@1.0.0/dist/index.css">
-    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="icon" type="image/svg+xml" href="../favicon.png">
     <link rel="apple-touch-icon" href="../favicon.png">
 </head>
 <body>
@@ -150,6 +207,9 @@ function generatePostTemplate(postMetadata, htmlContent, postPath) {
                 <div class="footer-info">
                     <p>&copy; ${new Date().getFullYear()} ${BLOG_CONFIG.title}. All rights reserved.</p>
                 </div>
+                <div class="footer-bottom">
+                    <p>Powered by <strong>GitHub Pages</strong> & <strong>GitHub Actions</strong></p>
+                </div>
             </div>
         </div>
     </footer>
@@ -160,43 +220,26 @@ function generatePostTemplate(postMetadata, htmlContent, postPath) {
 }
 
 // 构建文章页面
-function buildPost(postId) {
+function buildPost(filePath) {
   try {
-    const postDir = path.join(BLOG_CONFIG.postsDir, postId);
-    const mdFile = path.join(postDir, 'index.md');
-
-    if (!fs.existsSync(mdFile)) {
-      console.log(`  ⚠️  跳过 ${postId}: 未找到 index.md`);
-      return null;
-    }
-
-    const content = fs.readFileSync(mdFile, 'utf-8');
+    const content = fs.readFileSync(filePath, 'utf-8');
     const { metadata, content: mdContent } = parseFrontmatter(content);
 
     // 转换 Markdown 为 HTML
     const htmlContent = marked.parse(mdContent);
 
     // 生成完整页面
-    const fullHtml = generatePostTemplate(metadata, htmlContent, postId);
+    const fullHtml = generatePostTemplate(metadata, htmlContent);
 
     // 写入 HTML 文件
-    const outputFilePath = path.join(postDir, 'index.html');
+    const outputFilePath = filePath.replace('.md', '.html');
     fs.writeFileSync(outputFilePath, fullHtml, 'utf-8');
 
-    console.log(`  ✅ ${postId}/index.md → ${postId}/index.html`);
+    console.log(`  ✅ ${path.basename(filePath)} → ${path.basename(outputFilePath)}`);
 
-    // 检查是否有封面图片
-    const picFile = path.join(postDir, 'pic.png');
-    const hasPic = fs.existsSync(picFile);
-
-    return {
-      id: postId,
-      ...metadata,
-      image: hasPic ? `${postId}/pic.png` : null,
-      hasPic: hasPic,
-    };
+    return metadata;
   } catch (error) {
-    console.error(`  ❌ 错误处理 ${postId}:`, error.message);
+    console.error(`  ❌ 错误处理 ${path.basename(filePath)}:`, error.message);
     return null;
   }
 }
@@ -205,247 +248,60 @@ function buildPost(postId) {
 function buildAllPosts() {
   console.log('📝 开始构建博客文章...\n');
 
-  // 获取所有文章文件夹
-  const postDirs = fs.readdirSync(BLOG_CONFIG.postsDir).filter((dir) => {
-    return fs.statSync(path.join(BLOG_CONFIG.postsDir, dir)).isDirectory();
-  });
+  // 创建模板目录
+  const templatesDir = path.join(__dirname, 'templates');
+  if (!fs.existsSync(templatesDir)) {
+    fs.mkdirSync(templatesDir, { recursive: true });
+  }
 
-  if (postDirs.length === 0) {
-    console.log('  ⚠️  没有找到文章文件夹');
+  // 获取所有 Markdown 文件
+  const mdFiles = fs.readdirSync(BLOG_CONFIG.postsDir).filter((file) => file.endsWith('.md'));
+
+  if (mdFiles.length === 0) {
+    console.log('  ⚠️  没有找到 Markdown 文件');
     return [];
   }
 
   const metadataList = [];
 
-  for (const dir of postDirs) {
-    const metadata = buildPost(dir);
+  for (const file of mdFiles) {
+    const filePath = path.join(BLOG_CONFIG.postsDir, file);
+    const metadata = buildPost(filePath);
     if (metadata) {
       metadataList.push(metadata);
     }
   }
 
-  // 按日期排序（由晚到早）
-  metadataList.sort((a, b) => new Date(b.date) - new Date(a.date));
-
   console.log(`\n✅ 构建完成！共处理 ${metadataList.length} 篇文章\n`);
   return metadataList;
 }
 
-// 生成首页
-function generateIndexHtml(postsData) {
-  const postsJson = JSON.stringify(postsData);
-  
-  return `<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${BLOG_CONFIG.title} - 我的博客</title>
-    <meta name="description" content="${BLOG_CONFIG.title} - 记录生活与技术，探索未知">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans@1.0.0/dist/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="index.html" class="logo">
-                    <span class="logo-icon">F</span>
-                    <span class="logo-text">${BLOG_CONFIG.title}</span>
-                </a>
-                <div class="nav-links">
-                    <a href="index.html" class="nav-link active">首页</a>
-                    <a href="about/index.html" class="nav-link">关于</a>
-                    <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
-                        <span class="icon-sun">☀️</span>
-                        <span class="icon-moon">🌙</span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
+// 清理旧的 HTML 文件（保留 Markdown 源文件）
+function cleanupOldHtml() {
+  const htmlFiles = fs.readdirSync(BLOG_CONFIG.postsDir).filter((file) => file.endsWith('.html'));
 
-    <main class="main">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">欢迎来到 ${BLOG_CONFIG.title}</h1>
-                    <p class="hero-description">记录生活、分享技术、探索未知</p>
-                    <div class="hero-tags">
-                        <span class="tag"># 技术博客</span>
-                        <span class="tag"># 生活随笔</span>
-                        <span class="tag"># 学习笔记</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+  for (const file of htmlFiles) {
+    const filePath = path.join(BLOG_CONFIG.postsDir, file);
+    const correspondingMd = filePath.replace('.html', '.md');
 
-        <!-- Search Section -->
-        <section class="search-section">
-            <div class="container">
-                <div class="search-box">
-                    <input type="text" id="search-input" placeholder="🔍 搜索文章..." autocomplete="off">
-                    <span class="search-count" id="search-count"></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog Posts Section -->
-        <section class="posts-section">
-            <div class="container">
-                <h2 class="section-title">最新文章</h2>
-                <div class="posts-grid" id="posts-grid">
-                    <!-- Blog Post Cards will be inserted here by JavaScript -->
-                </div>
-                <div class="no-results" id="no-results" style="display: none;">
-                    <p>😕 没有找到匹配的文章</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <p>&copy; ${new Date().getFullYear()} ${BLOG_CONFIG.title}. All rights reserved.</p>
-                    <p class="footer-links">
-                        <a href="https://github.com/NachoNeko1" target="_blank">GitHub</a>
-                        <span class="separator">|</span>
-                        <a href="mailto:y1964829632@163.com">Email</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Blog posts data (generated by build.js)
-        const blogPosts = ${postsJson};
-
-        // Random image URLs
-        const isAndroid = /Android/i.test(navigator.userAgent);
-        const randomImagePc = '${BLOG_CONFIG.randomImagePc}';
-        const randomImageMobile = '${BLOG_CONFIG.randomImageMobile}';
-        const randomImage = isAndroid ? randomImageMobile : randomImagePc;
-
-        // Render blog posts
-        function renderPosts(posts) {
-            const postsGrid = document.getElementById('posts-grid');
-            const noResults = document.getElementById('no-results');
-
-            if (posts.length === 0) {
-                postsGrid.style.display = 'none';
-                noResults.style.display = 'block';
-                return;
-            }
-
-            postsGrid.style.display = 'grid';
-            noResults.style.display = 'none';
-
-            postsGrid.innerHTML = posts.map(post => {
-                const imageSrc = post.image || randomImage + '?t=' + Date.now();
-                const imageStyle = post.image ? '' : 'style="background-size: cover;"';
-                
-                return \`
-                    <article class="post-card" data-title="\${post.title}" data-description="\${post.description}" data-tags="\${post.tags.join(', ')}">
-                        <div class="post-image" \${imageStyle}>
-                            <img src="\${imageSrc}" alt="\${post.title}" loading="lazy" \${!post.image ? 'style="display: none;"' : ''}>
-                            <div class="post-date">\${post.date}</div>
-                        </div>
-                        <div class="post-content">
-                            <div class="post-tags">
-                                \${post.tags.map(tag => \`<span class="post-tag">\${tag}</span>\`).join('')}
-                            </div>
-                            <h3 class="post-title"><a href="posts/\${post.id}/index.html">\${post.title}</a></h3>
-                            <p class="post-description">\${post.description}</p>
-                            <div class="post-footer">
-                                <span class="post-read-time">⏱ \${post.readTime || '5 分钟'}</span>
-                                <a href="posts/\${post.id}/index.html" class="read-more">阅读全文 →</a>
-                            </div>
-                        </div>
-                    </article>
-                \`;
-            }).join('');
-        }
-
-        // Search functionality
-        function initSearch() {
-            const searchInput = document.getElementById('search-input');
-            const searchCount = document.getElementById('search-count');
-
-            searchInput.addEventListener('input', function() {
-                const query = this.value.toLowerCase().trim();
-                
-                if (query === '') {
-                    renderPosts(blogPosts);
-                    searchCount.textContent = '';
-                    return;
-                }
-
-                const filteredPosts = blogPosts.filter(post => {
-                    const titleMatch = post.title.toLowerCase().includes(query);
-                    const descMatch = post.description.toLowerCase().includes(query);
-                    const tagsMatch = post.tags.some(tag => tag.toLowerCase().includes(query));
-                    return titleMatch || descMatch || tagsMatch;
-                });
-
-                renderPosts(filteredPosts);
-                searchCount.textContent = filteredPosts.length + ' 篇文章';
-            });
-        }
-
-        // Theme toggle functionality
-        function initThemeToggle() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const savedTheme = localStorage.getItem('theme') || 
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
-        }
-
-        // Dynamic Background - PC vs Android adaptive
-        function initDynamicBackground() {
-            document.body.style.backgroundImage = \`url('\${randomImage}?t=\${Date.now()}')\`;
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            renderPosts(blogPosts);
-            initSearch();
-            initThemeToggle();
-            initDynamicBackground();
-        });
-    </script>
-</body>
-</html>`;
-}
-
-// 生成首页
-function buildIndex() {
-  const postsData = buildAllPosts();
-  const indexHtml = generateIndexHtml(postsData);
-  fs.writeFileSync(path.join(__dirname, 'index.html'), indexHtml, 'utf-8');
-  console.log('✅ index.html 已生成\n');
+    // 只删除没有对应 .md 文件的 .html
+    if (!fs.existsSync(correspondingMd)) {
+      fs.unlinkSync(filePath);
+      console.log(`  🗑️  清理旧文件: ${file}`);
+    }
+  }
 }
 
 // 主函数
 async function main() {
   console.log('🚀 Fatetech命运科技 - 博客构建系统\n');
-  buildIndex();
+
+  // 清理旧文件
+  cleanupOldHtml();
+
+  // 构建文章
+  buildAllPosts();
+
   console.log('🎉 构建完成！');
   console.log('📄 访问 index.html 查看博客\n');
 }
