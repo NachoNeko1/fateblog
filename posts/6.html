@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript 入门与实践 | Fateblog</title>
+    <meta name="description" content="从零开始学习 TypeScript，提升代码质量和开发效率。">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="apple-touch-icon" href="../favicon.svg">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="../index.html" class="logo">
+                    <span class="logo-icon">F</span>
+                    <span class="logo-text">Fateblog</span>
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-link">首页</a>
+                    <a href="../about/index.html" class="nav-link">关于</a>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+                        <span class="icon-sun">☀️</span>
+                        <span class="icon-moon">🌙</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main post-page">
+        <div class="container">
+            <article class="post-article">
+                <header class="post-header">
+                    <div class="post-header-tags">
+                        <span class="post-tag">TypeScript</span>
+                        <span class="post-tag">类型系统</span>
+                        <span class="post-tag">前端</span>
+                    </div>
+                    <h1 class="post-header-title">TypeScript 入门与实践</h1>
+                    <div class="post-meta">
+                        <span class="post-meta-item">📅 2024年2月15日</span>
+                        <span class="post-meta-item">⏱ 12 分钟阅读</span>
+                        <span class="post-meta-item">👁 624 次阅读</span>
+                    </div>
+                </header>
+
+                <div class="post-body">
+                    <p>TypeScript 是 JavaScript 的超集，在 JavaScript 的基础上添加了静态类型系统。它能帮助开发者在编译时捕获错误，提升代码质量和开发效率。</p>
+
+                    <h2>为什么选择 TypeScript？</h2>
+                    
+                    <h3>类型系统的优势</h3>
+                    
+                    <ul>
+                        <li>✅ 提前捕获类型错误</li>
+                        <li>✅ 更好的 IDE 支持（自动补全、跳转定义）</li>
+                        <li>✅ 更强的重构信心</li>
+                        <li>✅ 更好的代码文档（类型即文档）</li>
+                        <li>✅ 提升团队协作效率</li>
+                    </ul>
+
+                    <h3>对比 JavaScript</h3>
+                    
+                    <pre><code>// JavaScript - 运行时错误
+function add(a, b) {
+  return a + b;
+}
+
+add('hello', 1); // ❌ 'hello1' 不符合预期
+
+// TypeScript - 编译时错误
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+add('hello', 1); // ❌ 编译错误：参数类型不匹配</code></pre>
+
+                    <h2>基础类型</h2>
+                    
+                    <h3>原始类型</h3>
+                    
+                    <pre><code>let name: string = 'John';
+let age: number = 25;
+let isStudent: boolean = true;
+let nothing: null = null;
+let undefinedVal: undefined = undefined;</code></pre>
+
+                    <h3>数组和元组</h3>
+                    
+                    <pre><code>let numbers: number[] = [1, 2, 3];
+let names: Array&lt;string&gt; = ['John', 'Jane'];
+
+let tuple: [string, number, boolean] = ['name', 25, true];
+let readonlyTuple: readonly string[] = ['a', 'b'];</code></pre>
+
+                    <h3>枚举</h3>
+                    
+                    <pre><code>enum Direction {
+  Up = 'UP',
+  Down = 'DOWN',
+  Left = 'LEFT',
+  Right = 'RIGHT'
+}
+
+let direction: Direction = Direction.Up;</code></pre>
+
+                    <h3>联合类型和交叉类型</h3>
+                    
+                    <pre><code>// 联合类型（OR）
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+// 交叉类型（AND）
+type Person = { name: string };
+type Employee = { company: string };
+type EmployeeInfo = Person & Employee;</code></pre>
+
+                    <h2>对象和接口</h2>
+                    
+                    <h3>接口定义</h3>
+                    
+                    <pre><code>interface User {
+  name: string;
+  age: number;
+  email?: string; // 可选属性
+  readonly id: number; // 只读属性
+}
+
+let user: User = {
+  name: 'John',
+  age: 25,
+  id: 1
+};</code></pre>
+
+                    <h3>类型别名</h3>
+                    
+                    <pre><code>type User = {
+  name: string;
+  age: number;
+};
+
+type ID = string | number;</code></pre>
+
+                    <h3>接口继承</h3>
+                    
+                    <pre><code>interface Animal {
+  name: string;
+  age: number;
+}
+
+interface Dog extends Animal {
+  breed: string;
+  bark(): void;
+}</code></pre>
+
+                    <h2>函数类型</h2>
+                    
+                    <h3>函数定义</h3>
+                    
+                    <pre><code>// 完整类型声明
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+// 箭头函数
+const greet = (name: string): string => `Hello, ${name}!`;
+
+// 函数类型
+type MathOperation = (a: number, b: number) => number;
+const add: MathOperation = (a, b) => a + b;</code></pre>
+
+                    <h3>可选参数和默认值</h3>
+                    
+                    <pre><code>function greet(name: string, greeting?: string): string {
+  return greeting ? `${greeting}, ${name}!` : `Hello, ${name}!`;
+}
+
+function greet(name: string, greeting = 'Hello'): string {
+  return `${greeting}, ${name}!`;
+}</code></pre>
+
+                    <h3>剩余参数</h3>
+                    
+                    <pre><code>function sum(...numbers: number[]): number {
+  return numbers.reduce((total, num) => total + num, 0);
+}</code></pre>
+
+                    <h2>泛型</h2>
+                    
+                    <h3>基本泛型</h3>
+                    
+                    <pre><code>function identity&lt;T&gt;(value: T): T {
+  return value;
+}
+
+identity('hello'); // T = string
+identity(123);     // T = number
+identity&lt;boolean&gt;(true); // T = boolean</code></pre>
+
+                    <h3>泛型接口</h3>
+                    
+                    <pre><code>interface ApiResponse&lt;T&gt; {
+  data: T;
+  status: number;
+  message: string;
+}
+
+const response: ApiResponse&lt;User&gt; = {
+  data: { name: 'John', age: 25 },
+  status: 200,
+  message: 'OK'
+};</code></pre>
+
+                    <h3>泛型约束</h3>
+                    
+                    <pre><code>interface HasLength {
+  length: number;
+}
+
+function logLength&lt;T extends HasLength&gt;(item: T): void {
+  console.log(item.length);
+}
+
+logLength('hello'); // ✅
+logLength(123);     // ❌ 数字没有 length 属性</code></pre>
+
+                    <h2>类型守卫</h2>
+                    
+                    <h3>typeof 守卫</h3>
+                    
+                    <pre><code>function isString(value: unknown): value is string {
+  return typeof value === 'string';
+}
+
+function process(value: unknown) {
+  if (isString(value)) {
+    // value 被推断为 string
+    console.log(value.toUpperCase());
+  }
+}</code></pre>
+
+                    <h3>instanceof 守卫</h3>
+                    
+                    <pre><code>class User {
+  constructor(public name: string) {}
+}
+
+class Admin extends User {
+  constructor(public role: string) {
+    super('Admin');
+  }
+}
+
+function checkAccess(user: User | Admin): string {
+  if (user instanceof Admin) {
+    return 'Admin access';
+  }
+  return 'User access';
+}</code></pre>
+
+                    <h2>高级类型</h2>
+                    
+                    <h3>映射类型</h3>
+                    
+                    <pre><code>type Stringify&lt;T&gt; = {
+  [P in keyof T]: string;
+};
+
+type User = { name: string; age: number };
+type StringifiedUser = Stringify&lt;User&gt;;
+// { name: string; age: string; }</code></pre>
+
+                    <h3>条件类型</h3>
+                    
+                    <pre><code>type IsString&lt;T&gt; = T extends string ? true : false;
+
+type A = IsString&lt;'hello'&gt;; // true
+type B = IsString&lt;number&gt;;  // false</code></pre>
+
+                    <h2>类型操作符</h2>
+                    
+                    <pre><code>// keyof - 获取对象的键类型
+type User = { name: string; age: number };
+type UserKeys = keyof User; // 'name' | 'age'
+
+// typeof - 获取变量的类型
+let user = { name: 'John', age: 25 };
+type UserType = typeof user;
+
+// in - 属性存在检查
+type HasName = 'name' in { name: string }; // true</code></pre>
+
+                    <h2>实用技巧</h2>
+                    
+                    <h3>as const</h3>
+                    
+                    <pre><code>const directions = {
+  Up: 'UP',
+  Down: 'DOWN'
+} as const;
+
+// directions 的类型为 readonly { Up: 'UP'; Down: 'DOWN'; }
+// 而不是 { Up: string; Down: string; }</code></pre>
+
+                    <h3>satisfies 操作符</h3>
+                    
+                    <pre><code>const config = {
+  name: 'MyApp',
+  version: '1.0.0'
+} satisfies { name: string; version: string };
+
+// config 的类型为 { name: string; version: string; }
+// 但保留了具体的字面量类型</code></pre>
+
+                    <h2>总结</h2>
+                    
+                    <p>TypeScript 通过静态类型系统为 JavaScript 提供了强大的工具。掌握 TypeScript 不仅能提升代码质量，还能让大型项目的维护变得更加容易。建议从简单的类型开始，逐步深入学习高级类型特性。</p>
+
+                    <blockquote>
+                        "类型不是约束，而是自由的保障。"
+                    </blockquote>
+
+                    <a href="../index.html" class="back-to-list">← 返回文章列表</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2024 Fateblog. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom">
+                    <p>Powered by <strong>GitHub Pages</strong> & <strong>GitHub Actions</strong></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

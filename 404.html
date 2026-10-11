@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 页面未找到 | Fateblog</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <span class="logo-icon">F</span>
+                    <span class="logo-text">Fateblog</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/" class="nav-link">首页</a>
+                    <a href="/about/index.html" class="nav-link">关于</a>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+                        <span class="icon-sun">☀️</span>
+                        <span class="icon-moon">🌙</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main" style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">
+        <div class="container" style="text-align: center;">
+            <div style="font-size: 8rem; font-weight: 700; background: linear-gradient(135deg, #6c5ce7, #00cec9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">404</div>
+            <h1 style="font-size: 2rem; margin: 20px 0; color: var(--text-color);">页面未找到</h1>
+            <p style="color: var(--text-light); margin-bottom: 30px; font-size: 1.1rem;">
+                您访问的页面可能已被删除、移动或暂时不可用。
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="/" class="back-to-list" style="background: var(--primary-color); color: white;">← 返回首页</a>
+                <a href="/about/index.html" class="back-to-list" style="background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color);">关于博客</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2024 Fateblog. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom">
+                    <p>Powered by <strong>GitHub Pages</strong> & <strong>GitHub Actions</strong></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const savedTheme = localStorage.getItem('fateblog-theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('fateblog-theme', newTheme);
+            });
+        });
+    </script>
+</body>
+</html>
