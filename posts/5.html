@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>响应式设计最佳实践 | Fateblog</title>
-    <meta name="description" content="打造在不同设备上都有优秀体验的网页设计。">
+    <title>"响应式设计最佳实践" | Fatetech命运科技</title>
+    <meta name="description" content=""打造在不同设备上都有优秀体验的网页设计。"">
+    <meta name="keywords" content="响应式, 设计, 移动端">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans@1.0.0/dist/index.css">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="apple-touch-icon" href="../favicon.svg">
 </head>
@@ -18,7 +19,7 @@
             <nav class="nav">
                 <a href="../index.html" class="logo">
                     <span class="logo-icon">F</span>
-                    <span class="logo-text">Fateblog</span>
+                    <span class="logo-text">Fatetech命运科技</span>
                 </a>
                 <div class="nav-links">
                     <a href="../index.html" class="nav-link">首页</a>
@@ -41,24 +42,19 @@
                         <span class="post-tag">设计</span>
                         <span class="post-tag">移动端</span>
                     </div>
-                    <h1 class="post-header-title">响应式设计最佳实践</h1>
+                    <h1 class="post-header-title">"响应式设计最佳实践"</h1>
                     <div class="post-meta">
                         <span class="post-meta-item">📅 2024年2月10日</span>
-                        <span class="post-meta-item">⏱ 7 分钟阅读</span>
-                        <span class="post-meta-item">👁 432 次阅读</span>
+                        <span class="post-meta-item">⏱ "7 分钟"</span>
                     </div>
                 </header>
 
                 <div class="post-body">
                     <p>响应式设计让网页能够适应各种设备尺寸，从手机到桌面显示器。随着移动设备用户的增长，响应式设计已成为现代 Web 开发的标准。</p>
-
-                    <h2>响应式设计的核心理念</h2>
-                    
-                    <h3>移动优先（Mobile First）</h3>
-                    
-                    <p>移动优先是一种设计理念，从最小的屏幕开始设计，然后逐步扩展到更大的屏幕。</p>
-                    
-                    <pre><code>/* 基础样式（移动端） */
+<h2>响应式设计的核心理念</h2>
+<h3>移动优先（Mobile First）</h3>
+<p>移动优先是一种设计理念，从最小的屏幕开始设计，然后逐步扩展到更大的屏幕。</p>
+<pre><code class="language-css">/* 基础样式（移动端） */
 .container {
   padding: 15px;
 }
@@ -76,26 +72,21 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-}</code></pre>
-
-                    <h2>视口配置</h2>
-                    
-                    <p>设置正确的视口是响应式设计的基础：</p>
-                    
-                    <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
-
-                    <h2>弹性布局技巧</h2>
-                    
-                    <h3>弹性图片</h3>
-                    
-                    <pre><code>img {
+}
+</code></pre>
+<h2>视口配置</h2>
+<p>设置正确的视口是响应式设计的基础：</p>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+</code></pre>
+<h2>弹性布局技巧</h2>
+<h3>弹性图片</h3>
+<pre><code class="language-css">img {
   max-width: 100%;
   height: auto;
-}</code></pre>
-
-                    <h3>弹性字体</h3>
-                    
-                    <pre><code>/* 使用 clamp() 实现响应式字体 */
+}
+</code></pre>
+<h3>弹性字体</h3>
+<pre><code class="language-css">/* 使用 clamp() 实现响应式字体 */
 h1 {
   font-size: clamp(1.5rem, 5vw, 3rem);
 }
@@ -103,11 +94,10 @@ h1 {
 /* 使用 rem 单位 */
 body {
   font-size: 1rem;
-}</code></pre>
-
-                    <h3>弹性间距</h3>
-                    
-                    <pre><code>:root {
+}
+</code></pre>
+<h3>弹性间距</h3>
+<pre><code class="language-css">:root {
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
@@ -116,31 +106,26 @@ body {
 /* 使用弹性单位 */
 .element {
   padding: var(--space-md);
-}</code></pre>
-
-                    <h2>响应式图片</h2>
-                    
-                    <h3>srcset 和 sizes</h3>
-                    
-                    <pre><code>&lt;img
-  src="small.jpg"
-  srcset="small.jpg 320w, medium.jpg 768w, large.jpg 1200w"
-  sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-  alt="描述"&gt;</code></pre>
-
-                    <h3>picture 元素</h3>
-                    
-                    <pre><code>&lt;picture&gt;
-  &lt;source media="(max-width: 600px)" srcset="mobile.jpg"&gt;
-  &lt;source media="(max-width: 900px)" srcset="tablet.jpg"&gt;
-  &lt;img src="desktop.jpg" alt="描述"&gt;
-&lt;/picture&gt;</code></pre>
-
-                    <h2>响应式布局模式</h2>
-                    
-                    <h3>Flexbox 布局</h3>
-                    
-                    <pre><code>.flex-container {
+}
+</code></pre>
+<h2>响应式图片</h2>
+<h3>srcset 和 sizes</h3>
+<pre><code class="language-html">&lt;img
+  src=&quot;small.jpg&quot;
+  srcset=&quot;small.jpg 320w, medium.jpg 768w, large.jpg 1200w&quot;
+  sizes=&quot;(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw&quot;
+  alt=&quot;描述&quot;&gt;
+</code></pre>
+<h3>picture 元素</h3>
+<pre><code class="language-html">&lt;picture&gt;
+  &lt;source media=&quot;(max-width: 600px)&quot; srcset=&quot;mobile.jpg&quot;&gt;
+  &lt;source media=&quot;(max-width: 900px)&quot; srcset=&quot;tablet.jpg&quot;&gt;
+  &lt;img src=&quot;desktop.jpg&quot; alt=&quot;描述&quot;&gt;
+&lt;/picture&gt;
+</code></pre>
+<h2>响应式布局模式</h2>
+<h3>Flexbox 布局</h3>
+<pre><code class="language-css">.flex-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -148,25 +133,22 @@ body {
 
 .flex-item {
   flex: 1 1 300px;
-}</code></pre>
-
-                    <h3>Grid 布局</h3>
-                    
-                    <pre><code>.grid-container {
+}
+</code></pre>
+<h3>Grid 布局</h3>
+<pre><code class="language-css">.grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-}</code></pre>
-
-                    <h2>响应式导航</h2>
-                    
-                    <h3>汉堡菜单</h3>
-                    
-                    <pre><code>&lt;nav class="navbar"&gt;
-  &lt;button class="menu-toggle"&gt;☰&lt;/button&gt;
-  &lt;ul class="nav-list"&gt;
-    &lt;li&gt;&lt;a href="/"&gt;首页&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/about"&gt;关于&lt;/a&gt;&lt;/li&gt;
+}
+</code></pre>
+<h2>响应式导航</h2>
+<h3>汉堡菜单</h3>
+<pre><code class="language-html">&lt;nav class=&quot;navbar&quot;&gt;
+  &lt;button class=&quot;menu-toggle&quot;&gt;☰&lt;/button&gt;
+  &lt;ul class=&quot;nav-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;/&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/about&quot;&gt;关于&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;
 
@@ -178,61 +160,50 @@ body {
   .nav-list.active {
     display: block;
   }
-}</code></pre>
-
-                    <h2>响应式测试</h2>
-                    
-                    <h3>浏览器开发者工具</h3>
-                    
-                    <ul>
-                        <li>Chrome DevTools：设备模拟工具</li>
-                        <li>Firefox DevTools：响应式设计模式</li>
-                        <li>响应式测试设备：iPhone、iPad、Android</li>
-                    </ul>
-
-                    <h3>在线测试工具</h3>
-                    
-                    <ul>
-                        <li>Responsively.app</li>
-                        <li>BrowserStack</li>
-                        <li>LambdaTest</li>
-                    </ul>
-
-                    <h2>性能优化</h2>
-                    
-                    <h3>资源加载优化</h3>
-                    
-                    <pre><code>&lt;!-- 预加载关键资源 --&gt;
-&lt;link rel="preload" href="font.woff2" as="font" crossorigin&gt;
+}
+</code></pre>
+<h2>响应式测试</h2>
+<h3>浏览器开发者工具</h3>
+<ul>
+<li>Chrome DevTools：设备模拟工具</li>
+<li>Firefox DevTools：响应式设计模式</li>
+<li>响应式测试设备：iPhone、iPad、Android</li>
+</ul>
+<h3>在线测试工具</h3>
+<ul>
+<li>Responsively.app</li>
+<li>BrowserStack</li>
+<li>LambdaTest</li>
+</ul>
+<h2>性能优化</h2>
+<h3>资源加载优化</h3>
+<pre><code class="language-html">&lt;!-- 预加载关键资源 --&gt;
+&lt;link rel=&quot;preload&quot; href=&quot;font.woff2&quot; as=&quot;font&quot; crossorigin&gt;
 
 &lt;!-- 懒加载图片 --&gt;
-&lt;img src="image.jpg" loading="lazy" alt="描述"&gt;
+&lt;img src=&quot;image.jpg&quot; loading=&quot;lazy&quot; alt=&quot;描述&quot;&gt;
 
 &lt;!-- 延迟加载脚本 --&gt;
-&lt;script src="script.js" defer&gt;&lt;/script&gt;</code></pre>
-
-                    <h3>字体优化</h3>
-                    
-                    <pre><code>/* 使用字体子集 */
+&lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;
+</code></pre>
+<h3>字体优化</h3>
+<pre><code class="language-css">/* 使用字体子集 */
 @font-face {
-  font-family: 'MyFont';
-  src: url('font-subset.woff2') format('woff2');
+  font-family: &#39;MyFont&#39;;
+  src: url(&#39;font-subset.woff2&#39;) format(&#39;woff2&#39;);
   font-display: swap;
-}</code></pre>
-
-                    <h2>可访问性</h2>
-                    
-                    <ul>
-                        <li>确保对比度足够（WCAG AA 标准）</li>
-                        <li>使用语义化 HTML</li>
-                        <li>添加 ARIA 属性</li>
-                        <li>支持键盘导航</li>
-                        <li>触控目标大小至少 44x44px</li>
-                    </ul>
-
-                    <h2>总结</h2>
-                    
-                    <p>响应式设计是一个持续的过程，需要关注用户体验、性能和可访问性。遵循移动优先原则，使用弹性布局，进行充分的测试，就能创建出优秀的响应式网页。</p>
+}
+</code></pre>
+<h2>可访问性</h2>
+<ul>
+<li>确保对比度足够（WCAG AA 标准）</li>
+<li>使用语义化 HTML</li>
+<li>添加 ARIA 属性</li>
+<li>支持键盘导航</li>
+<li>触控目标大小至少 44x44px</li>
+</ul>
+<h2>总结</h2>
+<p>响应式设计是一个持续的过程，需要关注用户体验、性能和可访问性。遵循移动优先原则，使用弹性布局，进行充分的测试，就能创建出优秀的响应式网页。</p>
 
                     <a href="../index.html" class="back-to-list">← 返回文章列表</a>
                 </div>
@@ -244,7 +215,7 @@ body {
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <p>&copy; 2024 Fateblog. All rights reserved.</p>
+                    <p>&copy; 2026 Fatetech命运科技. All rights reserved.</p>
                 </div>
                 <div class="footer-bottom">
                     <p>Powered by <strong>GitHub Pages</strong> & <strong>GitHub Actions</strong></p>

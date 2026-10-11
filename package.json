@@ -1,0 +1,21 @@
+{
+  "name": "fateblog",
+  "version": "1.0.0",
+  "description": "Fatetech命运科技 - 现代博客系统",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch"
+  },
+  "dependencies": {
+    "marked": "^12.0.0"
+  },
+  "keywords": [
+    "blog",
+    "markdown",
+    "github-pages",
+    "fatetech"
+  ],
+  "author": "Fatetech",
+  "license": "MIT"
+}

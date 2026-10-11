@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeScript 入门与实践 | Fateblog</title>
-    <meta name="description" content="从零开始学习 TypeScript，提升代码质量和开发效率。">
+    <title>"TypeScript 入门与实践" | Fatetech命运科技</title>
+    <meta name="description" content=""从零开始学习 TypeScript，提升代码质量和开发效率。"">
+    <meta name="keywords" content="TypeScript, 类型系统, 前端">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans@1.0.0/dist/index.css">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="apple-touch-icon" href="../favicon.svg">
 </head>
@@ -18,7 +19,7 @@
             <nav class="nav">
                 <a href="../index.html" class="logo">
                     <span class="logo-icon">F</span>
-                    <span class="logo-text">Fateblog</span>
+                    <span class="logo-text">Fatetech命运科技</span>
                 </a>
                 <div class="nav-links">
                     <a href="../index.html" class="nav-link">首页</a>
@@ -41,90 +42,77 @@
                         <span class="post-tag">类型系统</span>
                         <span class="post-tag">前端</span>
                     </div>
-                    <h1 class="post-header-title">TypeScript 入门与实践</h1>
+                    <h1 class="post-header-title">"TypeScript 入门与实践"</h1>
                     <div class="post-meta">
                         <span class="post-meta-item">📅 2024年2月15日</span>
-                        <span class="post-meta-item">⏱ 12 分钟阅读</span>
-                        <span class="post-meta-item">👁 624 次阅读</span>
+                        <span class="post-meta-item">⏱ "12 分钟"</span>
                     </div>
                 </header>
 
                 <div class="post-body">
                     <p>TypeScript 是 JavaScript 的超集，在 JavaScript 的基础上添加了静态类型系统。它能帮助开发者在编译时捕获错误，提升代码质量和开发效率。</p>
-
-                    <h2>为什么选择 TypeScript？</h2>
-                    
-                    <h3>类型系统的优势</h3>
-                    
-                    <ul>
-                        <li>✅ 提前捕获类型错误</li>
-                        <li>✅ 更好的 IDE 支持（自动补全、跳转定义）</li>
-                        <li>✅ 更强的重构信心</li>
-                        <li>✅ 更好的代码文档（类型即文档）</li>
-                        <li>✅ 提升团队协作效率</li>
-                    </ul>
-
-                    <h3>对比 JavaScript</h3>
-                    
-                    <pre><code>// JavaScript - 运行时错误
+<h2>为什么选择 TypeScript？</h2>
+<h3>类型系统的优势</h3>
+<ul>
+<li>✅ 提前捕获类型错误</li>
+<li>✅ 更好的 IDE 支持（自动补全、跳转定义）</li>
+<li>✅ 更强的重构信心</li>
+<li>✅ 更好的代码文档（类型即文档）</li>
+<li>✅ 提升团队协作效率</li>
+</ul>
+<h3>对比 JavaScript</h3>
+<pre><code class="language-javascript">// JavaScript - 运行时错误
 function add(a, b) {
   return a + b;
 }
 
-add('hello', 1); // ❌ 'hello1' 不符合预期
+add(&#39;hello&#39;, 1); // ❌ &#39;hello1&#39; 不符合预期
 
 // TypeScript - 编译时错误
 function add(a: number, b: number): number {
   return a + b;
 }
 
-add('hello', 1); // ❌ 编译错误：参数类型不匹配</code></pre>
-
-                    <h2>基础类型</h2>
-                    
-                    <h3>原始类型</h3>
-                    
-                    <pre><code>let name: string = 'John';
+add(&#39;hello&#39;, 1); // ❌ 编译错误：参数类型不匹配
+</code></pre>
+<h2>基础类型</h2>
+<h3>原始类型</h3>
+<pre><code class="language-typescript">let name: string = &#39;John&#39;;
 let age: number = 25;
 let isStudent: boolean = true;
 let nothing: null = null;
-let undefinedVal: undefined = undefined;</code></pre>
+let undefinedVal: undefined = undefined;
+</code></pre>
+<h3>数组和元组</h3>
+<pre><code class="language-typescript">let numbers: number[] = [1, 2, 3];
+let names: Array&lt;string&gt; = [&#39;John&#39;, &#39;Jane&#39;];
 
-                    <h3>数组和元组</h3>
-                    
-                    <pre><code>let numbers: number[] = [1, 2, 3];
-let names: Array&lt;string&gt; = ['John', 'Jane'];
-
-let tuple: [string, number, boolean] = ['name', 25, true];
-let readonlyTuple: readonly string[] = ['a', 'b'];</code></pre>
-
-                    <h3>枚举</h3>
-                    
-                    <pre><code>enum Direction {
-  Up = 'UP',
-  Down = 'DOWN',
-  Left = 'LEFT',
-  Right = 'RIGHT'
+let tuple: [string, number, boolean] = [&#39;name&#39;, 25, true];
+let readonlyTuple: readonly string[] = [&#39;a&#39;, &#39;b&#39;];
+</code></pre>
+<h3>枚举</h3>
+<pre><code class="language-typescript">enum Direction {
+  Up = &#39;UP&#39;,
+  Down = &#39;DOWN&#39;,
+  Left = &#39;LEFT&#39;,
+  Right = &#39;RIGHT&#39;
 }
 
-let direction: Direction = Direction.Up;</code></pre>
-
-                    <h3>联合类型和交叉类型</h3>
-                    
-                    <pre><code>// 联合类型（OR）
+let direction: Direction = Direction.Up;
+</code></pre>
+<h3>联合类型和交叉类型</h3>
+<pre><code class="language-typescript">// 联合类型（OR）
 type ID = string | number;
-type Status = 'pending' | 'success' | 'error';
+type Status = &#39;pending&#39; | &#39;success&#39; | &#39;error&#39;;
 
 // 交叉类型（AND）
 type Person = { name: string };
 type Employee = { company: string };
-type EmployeeInfo = Person & Employee;</code></pre>
-
-                    <h2>对象和接口</h2>
-                    
-                    <h3>接口定义</h3>
-                    
-                    <pre><code>interface User {
+type EmployeeInfo = Person &amp; Employee;
+</code></pre>
+<h2>对象和接口</h2>
+<h3>接口定义</h3>
+<pre><code class="language-typescript">interface User {
   name: string;
   age: number;
   email?: string; // 可选属性
@@ -132,23 +120,21 @@ type EmployeeInfo = Person & Employee;</code></pre>
 }
 
 let user: User = {
-  name: 'John',
+  name: &#39;John&#39;,
   age: 25,
   id: 1
-};</code></pre>
-
-                    <h3>类型别名</h3>
-                    
-                    <pre><code>type User = {
+};
+</code></pre>
+<h3>类型别名</h3>
+<pre><code class="language-typescript">type User = {
   name: string;
   age: number;
 };
 
-type ID = string | number;</code></pre>
-
-                    <h3>接口继承</h3>
-                    
-                    <pre><code>interface Animal {
+type ID = string | number;
+</code></pre>
+<h3>接口继承</h3>
+<pre><code class="language-typescript">interface Animal {
   name: string;
   age: number;
 }
@@ -156,69 +142,61 @@ type ID = string | number;</code></pre>
 interface Dog extends Animal {
   breed: string;
   bark(): void;
-}</code></pre>
-
-                    <h2>函数类型</h2>
-                    
-                    <h3>函数定义</h3>
-                    
-                    <pre><code>// 完整类型声明
+}
+</code></pre>
+<h2>函数类型</h2>
+<h3>函数定义</h3>
+<pre><code class="language-typescript">// 完整类型声明
 function greet(name: string): string {
   return `Hello, ${name}!`;
 }
 
 // 箭头函数
-const greet = (name: string): string => `Hello, ${name}!`;
+const greet = (name: string): string =&gt; `Hello, ${name}!`;
 
 // 函数类型
-type MathOperation = (a: number, b: number) => number;
-const add: MathOperation = (a, b) => a + b;</code></pre>
-
-                    <h3>可选参数和默认值</h3>
-                    
-                    <pre><code>function greet(name: string, greeting?: string): string {
+type MathOperation = (a: number, b: number) =&gt; number;
+const add: MathOperation = (a, b) =&gt; a + b;
+</code></pre>
+<h3>可选参数和默认值</h3>
+<pre><code class="language-typescript">function greet(name: string, greeting?: string): string {
   return greeting ? `${greeting}, ${name}!` : `Hello, ${name}!`;
 }
 
-function greet(name: string, greeting = 'Hello'): string {
+function greet(name: string, greeting = &#39;Hello&#39;): string {
   return `${greeting}, ${name}!`;
-}</code></pre>
-
-                    <h3>剩余参数</h3>
-                    
-                    <pre><code>function sum(...numbers: number[]): number {
-  return numbers.reduce((total, num) => total + num, 0);
-}</code></pre>
-
-                    <h2>泛型</h2>
-                    
-                    <h3>基本泛型</h3>
-                    
-                    <pre><code>function identity&lt;T&gt;(value: T): T {
+}
+</code></pre>
+<h3>剩余参数</h3>
+<pre><code class="language-typescript">function sum(...numbers: number[]): number {
+  return numbers.reduce((total, num) =&gt; total + num, 0);
+}
+</code></pre>
+<h2>泛型</h2>
+<h3>基本泛型</h3>
+<pre><code class="language-typescript">function identity&lt;T&gt;(value: T): T {
   return value;
 }
 
-identity('hello'); // T = string
+identity(&#39;hello&#39;); // T = string
 identity(123);     // T = number
-identity&lt;boolean&gt;(true); // T = boolean</code></pre>
-
-                    <h3>泛型接口</h3>
-                    
-                    <pre><code>interface ApiResponse&lt;T&gt; {
+identity&lt;boolean&gt;(true); // T = boolean
+</code></pre>
+<h3>泛型接口</h3>
+<pre><code class="language-typescript">interface ApiResponse&lt;T&gt; {
   data: T;
   status: number;
   message: string;
 }
 
 const response: ApiResponse&lt;User&gt; = {
-  data: { name: 'John', age: 25 },
+  data: { name: &#39;John&#39;, age: 25 },
   status: 200,
-  message: 'OK'
-};</code></pre>
-
-                    <h3>泛型约束</h3>
-                    
-                    <pre><code>interface HasLength {
+  message: &#39;OK&#39;
+};
+</code></pre>
+<h3>泛型约束</h3>
+<pre><code class="language-typescript">interface HasLength {
   length: number;
 }
 
@@ -226,15 +204,13 @@ function logLength&lt;T extends HasLength&gt;(item: T): void {
   console.log(item.length);
 }
 
-logLength('hello'); // ✅
-logLength(123);     // ❌ 数字没有 length 属性</code></pre>
-
-                    <h2>类型守卫</h2>
-                    
-                    <h3>typeof 守卫</h3>
-                    
-                    <pre><code>function isString(value: unknown): value is string {
-  return typeof value === 'string';
+logLength(&#39;hello&#39;); // ✅
+logLength(123);     // ❌ 数字没有 length 属性
+</code></pre>
+<h2>类型守卫</h2>
+<h3>typeof 守卫</h3>
+<pre><code class="language-typescript">function isString(value: unknown): value is string {
+  return typeof value === &#39;string&#39;;
 }
 
 function process(value: unknown) {
@@ -242,88 +218,78 @@ function process(value: unknown) {
     // value 被推断为 string
     console.log(value.toUpperCase());
   }
-}</code></pre>
-
-                    <h3>instanceof 守卫</h3>
-                    
-                    <pre><code>class User {
+}
+</code></pre>
+<h3>instanceof 守卫</h3>
+<pre><code class="language-typescript">class User {
   constructor(public name: string) {}
 }
 
 class Admin extends User {
   constructor(public role: string) {
-    super('Admin');
+    super(&#39;Admin&#39;);
   }
 }
 
 function checkAccess(user: User | Admin): string {
   if (user instanceof Admin) {
-    return 'Admin access';
+    return &#39;Admin access&#39;;
   }
-  return 'User access';
-}</code></pre>
-
-                    <h2>高级类型</h2>
-                    
-                    <h3>映射类型</h3>
-                    
-                    <pre><code>type Stringify&lt;T&gt; = {
+  return &#39;User access&#39;;
+}
+</code></pre>
+<h2>高级类型</h2>
+<h3>映射类型</h3>
+<pre><code class="language-typescript">type Stringify&lt;T&gt; = {
   [P in keyof T]: string;
 };
 
 type User = { name: string; age: number };
 type StringifiedUser = Stringify&lt;User&gt;;
-// { name: string; age: string; }</code></pre>
+// { name: string; age: string; }
+</code></pre>
+<h3>条件类型</h3>
+<pre><code class="language-typescript">type IsString&lt;T&gt; = T extends string ? true : false;
 
-                    <h3>条件类型</h3>
-                    
-                    <pre><code>type IsString&lt;T&gt; = T extends string ? true : false;
-
-type A = IsString&lt;'hello'&gt;; // true
-type B = IsString&lt;number&gt;;  // false</code></pre>
-
-                    <h2>类型操作符</h2>
-                    
-                    <pre><code>// keyof - 获取对象的键类型
+type A = IsString&lt;&#39;hello&#39;&gt;; // true
+type B = IsString&lt;number&gt;;  // false
+</code></pre>
+<h2>类型操作符</h2>
+<pre><code class="language-typescript">// keyof - 获取对象的键类型
 type User = { name: string; age: number };
-type UserKeys = keyof User; // 'name' | 'age'
+type UserKeys = keyof User; // &#39;name&#39; | &#39;age&#39;
 
 // typeof - 获取变量的类型
-let user = { name: 'John', age: 25 };
+let user = { name: &#39;John&#39;, age: 25 };
 type UserType = typeof user;
 
 // in - 属性存在检查
-type HasName = 'name' in { name: string }; // true</code></pre>
-
-                    <h2>实用技巧</h2>
-                    
-                    <h3>as const</h3>
-                    
-                    <pre><code>const directions = {
-  Up: 'UP',
-  Down: 'DOWN'
+type HasName = &#39;name&#39; in { name: string }; // true
+</code></pre>
+<h2>实用技巧</h2>
+<h3>as const</h3>
+<pre><code class="language-typescript">const directions = {
+  Up: &#39;UP&#39;,
+  Down: &#39;DOWN&#39;
 } as const;
 
-// directions 的类型为 readonly { Up: 'UP'; Down: 'DOWN'; }
-// 而不是 { Up: string; Down: string; }</code></pre>
-
-                    <h3>satisfies 操作符</h3>
-                    
-                    <pre><code>const config = {
-  name: 'MyApp',
-  version: '1.0.0'
+// directions 的类型为 readonly { Up: &#39;UP&#39;; Down: &#39;DOWN&#39;; }
+// 而不是 { Up: string; Down: string; }
+</code></pre>
+<h3>satisfies 操作符</h3>
+<pre><code class="language-typescript">const config = {
+  name: &#39;MyApp&#39;,
+  version: &#39;1.0.0&#39;
 } satisfies { name: string; version: string };
 
 // config 的类型为 { name: string; version: string; }
-// 但保留了具体的字面量类型</code></pre>
-
-                    <h2>总结</h2>
-                    
-                    <p>TypeScript 通过静态类型系统为 JavaScript 提供了强大的工具。掌握 TypeScript 不仅能提升代码质量，还能让大型项目的维护变得更加容易。建议从简单的类型开始，逐步深入学习高级类型特性。</p>
-
-                    <blockquote>
-                        "类型不是约束，而是自由的保障。"
-                    </blockquote>
+// 但保留了具体的字面量类型
+</code></pre>
+<h2>总结</h2>
+<p>TypeScript 通过静态类型系统为 JavaScript 提供了强大的工具。掌握 TypeScript 不仅能提升代码质量，还能让大型项目的维护变得更加容易。建议从简单的类型开始，逐步深入学习高级类型特性。</p>
+<blockquote>
+<p>&quot;类型不是约束，而是自由的保障。&quot;</p>
+</blockquote>
 
                     <a href="../index.html" class="back-to-list">← 返回文章列表</a>
                 </div>
@@ -335,7 +301,7 @@ type HasName = 'name' in { name: string }; // true</code></pre>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <p>&copy; 2024 Fateblog. All rights reserved.</p>
+                    <p>&copy; 2026 Fatetech命运科技. All rights reserved.</p>
                 </div>
                 <div class="footer-bottom">
                     <p>Powered by <strong>GitHub Pages</strong> & <strong>GitHub Actions</strong></p>
