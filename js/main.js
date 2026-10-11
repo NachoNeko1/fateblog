@@ -1,4 +1,4 @@
-// Fateblog Main JavaScript
+// Fate命定指冠 Main JavaScript
 // Theme toggle, animations, and interactive features
 
 (function() {
@@ -9,7 +9,19 @@
         initThemeToggle();
         initScrollEffects();
         initMobileNav();
+        initDynamicBackground();
     });
+
+    /**
+     * Dynamic Background - PC vs Android adaptive
+     */
+    function initDynamicBackground() {
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        const baseUrl = isAndroid ? 'https://pic2.rkn.cc.cd/' : 'https://pic.rkn.cc.cd/';
+        // Add timestamp to get a random image each time
+        const bgUrl = `${baseUrl}?t=${Date.now()}`;
+        document.body.style.backgroundImage = `url('${bgUrl}')`;
+    }
 
     /**
      * Theme Toggle Functionality
@@ -19,7 +31,7 @@
         if (!themeToggle) return;
 
         // Get saved theme or use system preference
-        const savedTheme = localStorage.getItem('fateblog-theme') || 
+        const savedTheme = localStorage.getItem('Fate命定指冠-theme') || 
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         
         document.documentElement.setAttribute('data-theme', savedTheme);
@@ -31,7 +43,7 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
             document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('fateblog-theme', newTheme);
+            localStorage.setItem('Fate命定指冠-theme', newTheme);
             updateThemeIcon(newTheme);
         });
     }

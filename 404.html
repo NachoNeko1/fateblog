@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - 页面未找到 | Fatetech命运科技</title>
+    <title>404 - 页面未找到 | Fate命定指冠</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
             <nav class="nav">
                 <a href="/" class="logo">
                     <span class="logo-icon">F</span>
-                    <span class="logo-text">Fatetech命运科技</span>
+                    <span class="logo-text">Fate命定指冠</span>
                 </a>
                 <div class="nav-links">
                     <a href="/" class="nav-link">首页</a>
@@ -51,7 +51,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <p>&copy; 2024 Fateblog. All rights reserved.</p>
+                    <p>&copy; 2024 Fate命定指冠. All rights reserved.</p>
                 </div>
                 <div class="footer-bottom">
                     <p>Powered by <strong>GitHub Pages</strong> & <strong>GitHub Actions</strong></p>
@@ -63,7 +63,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const themeToggle = document.getElementById('theme-toggle');
-            const savedTheme = localStorage.getItem('fateblog-theme') || 
+            const savedTheme = localStorage.getItem('Fate命定指冠-theme') || 
                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             document.documentElement.setAttribute('data-theme', savedTheme);
             
@@ -71,9 +71,18 @@
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('fateblog-theme', newTheme);
+                localStorage.setItem('Fate命定指冠-theme', newTheme);
             });
+
+            initDynamicBackground();
         });
+
+        // Dynamic Background - PC vs Android adaptive
+        function initDynamicBackground() {
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const baseUrl = isAndroid ? 'https://pic2.rkn.cc.cd/' : 'https://pic.rkn.cc.cd/';
+            document.body.style.backgroundImage = `url('${baseUrl}?t=${Date.now()}')`;
+        }
     </script>
 </body>
 </html>

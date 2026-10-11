@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Fateblog Markdown 构建脚本
+ * Fate命定指冠 Markdown 构建脚本
  * 将 posts/ 目录下的 .md 文件转换为 HTML 页面
  */
 
@@ -17,7 +17,7 @@ marked.setOptions({
 
 // 博客配置
 const BLOG_CONFIG = {
-  title: 'Fatetech命运科技',
+  title: 'Fate命定指冠',
   baseUrl: '/',
   postsDir: path.join(__dirname, 'posts'),
   outputDir: path.join(__dirname, 'posts'),
@@ -294,7 +294,7 @@ function cleanupOldHtml() {
 
 // 主函数
 async function main() {
-  console.log('🚀 Fatetech命运科技 - 博客构建系统\n');
+  console.log('🚀 Fate命定指冠 - 博客构建系统\n');
 
   // 清理旧文件
   cleanupOldHtml();

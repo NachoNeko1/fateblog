@@ -50,6 +50,28 @@ body {
     color: var(--text-color);
     line-height: 1.7;
     transition: var(--transition);
+    background-image: url('https://pic.rkn.cc.cd/');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* 半透明遮罩层 - 保证文字可读，背景不模糊 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.78);
+    z-index: -1;
+    pointer-events: none;
+}
+
+[data-theme="dark"] body::before {
+    background: rgba(10, 10, 10, 0.65);
 }
 
 img {
@@ -592,12 +614,14 @@ a:hover {
     height: 120px;
     border-radius: 50%;
     margin: 0 auto 30px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: white;
+    overflow: hidden;
+    box-shadow: var(--shadow-hover);
+}
+
+.about-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .about-name {

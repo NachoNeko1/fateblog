@@ -25,6 +25,7 @@ build/
 output/
 _site/
 public/
+posts/*.html
 
 # Logs
 *.log
