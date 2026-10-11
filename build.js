@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Fate命定指冠 Markdown 构建脚本
+ * Fatetech命运科技 Markdown 构建脚本
  * 将 posts/ 目录下的 .md 文件转换为 HTML 页面
  */
 
@@ -17,7 +17,7 @@ marked.setOptions({
 
 // 博客配置
 const BLOG_CONFIG = {
-  title: 'Fate命定指冠',
+  title: 'Fatetech命运科技',
   baseUrl: '/',
   postsDir: path.join(__dirname, 'posts'),
   outputDir: path.join(__dirname, 'posts'),
@@ -156,8 +156,8 @@ function generatePostTemplate(postMetadata, htmlContent) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans@1.0.0/dist/index.css">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="apple-touch-icon" href="../favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
 </head>
 <body>
     <header class="header">
@@ -294,7 +294,7 @@ function cleanupOldHtml() {
 
 // 主函数
 async function main() {
-  console.log('🚀 Fate命定指冠 - 博客构建系统\n');
+  console.log('🚀 Fatetech命运科技 - 博客构建系统\n');
 
   // 清理旧文件
   cleanupOldHtml();

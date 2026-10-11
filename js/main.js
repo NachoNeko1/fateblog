@@ -1,4 +1,4 @@
-// Fate命定指冠 Main JavaScript
+// Fatetech命运科技 Main JavaScript
 // Theme toggle, animations, and interactive features
 
 (function() {
@@ -31,7 +31,7 @@
         if (!themeToggle) return;
 
         // Get saved theme or use system preference
-        const savedTheme = localStorage.getItem('Fate命定指冠-theme') || 
+        const savedTheme = localStorage.getItem('Fatetech命运科技-theme') || 
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         
         document.documentElement.setAttribute('data-theme', savedTheme);
@@ -43,7 +43,7 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
             document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('Fate命定指冠-theme', newTheme);
+            localStorage.setItem('Fatetech命运科技-theme', newTheme);
             updateThemeIcon(newTheme);
         });
     }
